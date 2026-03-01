@@ -21,10 +21,7 @@ namespace presentacion
 
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            dgvArticulos.DataSource = negocio.listar();
-            dgvArticulos.Columns["ImagenUrl"].Visible = false;
-
+            cargar();
             cboCampo.Items.Add("Marca");
             cboCampo.Items.Add("Categoria");
         }
@@ -63,6 +60,19 @@ namespace presentacion
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            cargar();
+        }
+
+        private void cargar()
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            dgvArticulos.DataSource = negocio.listar();
+            dgvArticulos.Columns["Id"].Visible = false;
+            dgvArticulos.Columns["ImagenUrl"].Visible = false;
         }
     }
 }

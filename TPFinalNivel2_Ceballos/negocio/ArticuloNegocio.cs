@@ -58,23 +58,17 @@ namespace negocio
 
             try
             {
-                //string consulta = "select A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, ImagenUrl, Precio from ARTICULOS A, MARCAS M, CATEGORIAS C where M.Id = A.IdMarca and C.Id = A.IdCategoria and ";
-
                 if (campo == "Marca")
                 {
                     datos.setearConsulta("select A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, ImagenUrl, Precio from ARTICULOS A, MARCAS M, CATEGORIAS C where M.Id = A.IdMarca and C.Id = A.IdCategoria and IdMarca = @idMarca");
-                    //consulta += "M.Descripcion = '" + criterio + "'"; 
                     datos.setearParametro("@idMarca", id);
                 }
                 else
                 {
                     datos.setearConsulta("select A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, ImagenUrl, Precio from ARTICULOS A, MARCAS M, CATEGORIAS C where M.Id = A.IdMarca and C.Id = A.IdCategoria and IdCategoria = @idCategoria");
-                    //consulta += "C.Descripcion = '" + criterio + "'";
                     datos.setearParametro("@idCategoria", id);
-
                 }
 
-                //datos.setearConsulta(consulta);
                 datos.ejecutarConsulta();
 
                 while (datos.Lector.Read())
