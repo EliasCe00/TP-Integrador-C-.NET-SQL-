@@ -94,9 +94,13 @@ namespace presentacion
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
             Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-            negocio.eliminar(seleccionado);
-            cargar();
 
+            DialogResult respuesta = MessageBox.Show("Confirmar eliminacion", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if(respuesta == DialogResult.OK)
+            {
+                negocio.eliminar(seleccionado);
+                cargar();
+            }
         }
     }
 }
