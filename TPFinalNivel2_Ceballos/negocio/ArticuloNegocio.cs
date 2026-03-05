@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using dominio;
@@ -154,7 +155,26 @@ namespace negocio
             {
                 throw ex;
             }
-            finally 
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminar(Articulo eliminar)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("delete from ARTICULOS where Id = @id");
+                datos.setearParametro("@id", eliminar.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
             {
                 datos.cerrarConexion();
             }

@@ -89,5 +89,14 @@ namespace presentacion
             modificar.ShowDialog();
             cargar();
         }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            negocio.eliminar(seleccionado);
+            cargar();
+
+        }
     }
 }

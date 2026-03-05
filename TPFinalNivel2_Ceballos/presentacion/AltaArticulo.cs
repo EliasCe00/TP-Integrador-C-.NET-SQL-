@@ -85,7 +85,7 @@ namespace presentacion
                 else
                 {
                     negocio.agregar(articulo);
-                    MessageBox.Show("Agregado correctamente", "Aviso");
+                    MessageBox.Show("Agregado correctamente");
                 }
 
                 Close();
