@@ -77,6 +77,7 @@ namespace presentacion
             dgvArticulos.DataSource = listaArticulo;
             dgvArticulos.Columns["Id"].Visible = false;
             dgvArticulos.Columns["ImagenUrl"].Visible = false;
+            dgvArticulos.Columns["Precio"].DefaultCellStyle.Format = "C2";
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -109,16 +110,8 @@ namespace presentacion
 
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
         {
-            try
-            {
-                Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-                cargarImagen(seleccionado.ImagenUrl);
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+            Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            cargarImagen(seleccionado.ImagenUrl);
         }
 
         private void cargarImagen(string imagen)
