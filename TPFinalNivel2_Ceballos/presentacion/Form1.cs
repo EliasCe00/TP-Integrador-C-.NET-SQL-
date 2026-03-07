@@ -21,6 +21,7 @@ namespace presentacion
             InitializeComponent();
         }
 
+        //agregar filtro por precio
         private void frmPrincipal_Load(object sender, EventArgs e)
         {
             cargar();
