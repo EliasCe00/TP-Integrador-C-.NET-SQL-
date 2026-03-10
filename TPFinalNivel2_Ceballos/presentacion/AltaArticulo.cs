@@ -61,6 +61,10 @@ namespace presentacion
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
+            if (validarCampos())
+            {
+                return;
+            }
             ArticuloNegocio negocio = new ArticuloNegocio();
 
             try
@@ -87,7 +91,6 @@ namespace presentacion
                     negocio.agregar(articulo);
                     MessageBox.Show("Agregado correctamente");
                 }
-
                 Close();
             }
             catch (Exception ex)
@@ -95,6 +98,36 @@ namespace presentacion
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        private bool validarCampos()
+        {
+            if (string.IsNullOrWhiteSpace(txtCodigo.Text))
+            {
+                MessageBox.Show("Debe ingresar un código");
+                return true;
+            }
+            if (string.IsNullOrWhiteSpace(txtNombre.Text))
+            {
+                MessageBox.Show("Debe ingresar un nombre");
+                return true;
+            }
+            if (string.IsNullOrWhiteSpace(txtDescripcion.Text))
+            {
+                MessageBox.Show("Debe ingresar una descripción");
+                return true;
+            }
+            if (string.IsNullOrWhiteSpace(txtImagenUrl.Text))
+            {
+                MessageBox.Show("Debe ingresar una url");
+                return true;
+            }
+            if (!decimal.TryParse(txtPrecio.Text, out _))
+            {
+                MessageBox.Show("Debe ingresar un precio valido");
+                return true;
+            }
+            return false;
+        } 
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {

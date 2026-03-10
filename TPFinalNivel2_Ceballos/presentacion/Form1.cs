@@ -56,6 +56,10 @@ namespace presentacion
             ArticuloNegocio negocio = new ArticuloNegocio();
             try
             {
+                if(validarDesplegables())
+                {
+                    return;
+                }
                 string campo = cboCampo.SelectedItem.ToString();
                 int id = (int)cboCriterio.SelectedValue; 
                 dgvArticulos.DataSource = negocio.filtrar(campo, id);
@@ -64,6 +68,16 @@ namespace presentacion
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private bool validarDesplegables()
+        {
+            if(cboCampo.SelectedIndex < 0)
+            {
+                MessageBox.Show("Seleccione un campo para filtrar");
+                return true;
+            }
+            return false;
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
@@ -78,6 +92,7 @@ namespace presentacion
             dgvArticulos.DataSource = listaArticulo;
             dgvArticulos.Columns["Id"].Visible = false;
             dgvArticulos.Columns["ImagenUrl"].Visible = false;
+            //dgvArticulos.Columns["Codigo"].Visible = false;
             dgvArticulos.Columns["Precio"].DefaultCellStyle.Format = "C2";
         }
 
@@ -90,14 +105,33 @@ namespace presentacion
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
+            if (validarAccion())
+            {
+                return;
+            }
             Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
             frmAltaArticulo modificar = new frmAltaArticulo(seleccionado);
             modificar.ShowDialog();
             cargar();
         }
 
+        private bool validarAccion()
+        {
+            if(dgvArticulos.CurrentRow == null)
+            {
+                MessageBox.Show("No hay articulos seleccionados");
+                return true;
+            }
+            return false;
+        }
+
         private void btnEliminar_Click(object sender, EventArgs e)
         {
+            if (validarAccion()) 
+            {
+                return;
+            }
+
             ArticuloNegocio negocio = new ArticuloNegocio();
             Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
 
